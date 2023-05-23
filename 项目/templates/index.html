@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ch">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="no-referrer" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="static/css/bootstrap.min.css" />
+    <script src="static/js/jquery.js"></script>
+    <script src="static/js/script.js"></script>
+    <script src="./static/js/echarts.js"></script>
+    <script src="static/js/masonry.js"></script>
+    <script src="static/js/echarts-wordcloud.js"></script>
+    <link rel="stylesheet" href="static/css/common.css" />
+    <title>春节电影信息爬取与数据可视化分析系统</title>
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">春节电影信息爬取与数据可视化分析系统</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">首页</a>
+                    </li>
+                </ul>
+                <span class="badge text-bg-primary" id="time" style="font-size: 16px">北京时间 9:00:47</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="modal fade unselectable" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="spinner-grow text-primary"></div>
+                    <span class="h5" id="modalTitle">正在读取数据库，加载数据中···</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade unselectable" id="alert" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <!-- <div class="spinner-grow text-primary"></div> -->
+                    <span class="h5" id="modalTitle">页面数据未加载，先点击从数据库加载，或爬虫获取数据！</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade unselectable" id="info-alert" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="alert alert-success" role="alert">
+                        <h4 class="alert-heading" id="movieName">Well done!</h4>
+                        <div id="info"></div>
+                        <hr>
+                        <div class="mb-0">
+                            <strong>故事梗概：</strong>
+                            <p id="PlotSummary"></p>
+                        </div>
+                        
+                        <hr>
+                        <strong class="mb-3">精选评论</strong>
+                        <div class="container" id="comment"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 页面内容 -->
+    <div class="container my-5 text-center unselectable">
+        <h1 class="colorful fw-bold">春节电影信息爬取与数据可视化分析系统</h1>
+        <strong>数据来源：猫眼专业版,豆瓣网</strong>
+    </div>
+
+    <div class="container my-5">
+        <div class="card my-5 unselectable">
+            <div class="card-body">
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <button class="btn btn-bd-primary" type="button" onclick="deleteAllElements()">
+                        清空全部数据
+                    </button>
+                    <button class="btn btn-bd-primary" type="button" onclick="readDataFromDatabase()">
+                        从数据库中读取数据
+                    </button>
+                    <button class="btn btn-bd-primary" type="button" onclick="startCrawlerReadingData()">
+                        启动爬虫读取数据
+                    </button>
+                    <button class="btn btn-bd-primary" type="button" onclick="drawChart()">
+                        绘制图表
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="card-container" class="unselectable"></div>
+        <!-- <div class="mx-auto"></div> -->
+        <div id="chart1" class="mx-auto mt-3" style="width: 800px; height: 800px; display: none"></div>
+        <div id="chart2" class="mx-auto mt-3" style="width: 800px; height: 800px; display: none"></div>
+        <div id="chart3" class="mx-auto mt-3" style="width: 800px; height: 800px; display: none"></div>
+    </div>
+
+    <script src="static/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
