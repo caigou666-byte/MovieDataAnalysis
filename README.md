@@ -1,0 +1,2 @@
+# MovieDataAnalysis
+基于python的春节电影信息爬取与数据可视化分析 毕业设计项目
